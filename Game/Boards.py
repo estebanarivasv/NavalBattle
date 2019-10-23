@@ -1,3 +1,5 @@
+
+
 class Boards:
     def __init__(self, name="", rows=0, columns=0):
         self.__name = name
@@ -31,9 +33,19 @@ class Boards:
             self.__board.append(row)
 
     def printBoard(self):
-        for i in
+
+        for i in range(len(self.__board)):
+            print(i, end="      ")
+            for x in self.__board:
+                print(x[i], end="    ")
+            print()
+
+
+    def test(self):
+        print(self.__board)
 
 b = Boards('Primary', 10, 10)
 b.createBoard(10, 10)
-print(b.printBoard())
 print(b.getName())
+print(b.printBoard())
+b.test()
