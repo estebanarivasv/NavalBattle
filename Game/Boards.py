@@ -41,13 +41,3 @@ class Boards:
             for x in self.__board:
                 print(x[i], end="    ")
             print()
-
-
-
-
-
-b = Boards('Primary', 10, 10)
-b.createBoard(10, 10)
-print(b.getName())
-b.printBoard()
-
