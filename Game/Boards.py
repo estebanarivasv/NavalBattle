@@ -1,5 +1,3 @@
-
-
 class Boards:
     def __init__(self, name="", rows=0, columns=0):
         self.__name = name
@@ -25,10 +23,10 @@ class Boards:
     def setColumns(self):
         return self.__columns
 
-    def createBoard(self, rows, columns):
-        for i in range(rows):
+    def createBoard(self):
+        for i in range(self.__rows):
             row = []
-            for j in range(columns):
+            for j in range(self.__columns):
                 row.append(0)
             self.__board.append(row)
 
