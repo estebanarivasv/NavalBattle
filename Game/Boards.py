@@ -33,7 +33,9 @@ class Boards:
             self.__board.append(row)
 
     def printBoard(self):
-
+        k=0
+        print("      ", k, "  ", k+1, "  ", k+2, "  ", k+3, "  ", k+4, "  ", k+5, "  ", k+6, "  ", k+7, "  ", k+8, "  ", k+9)
+        print()
         for i in range(len(self.__board)):
             print(i, end="      ")
             for x in self.__board:
@@ -41,11 +43,11 @@ class Boards:
             print()
 
 
-    def test(self):
-        print(self.__board)
+
+
 
 b = Boards('Primary', 10, 10)
 b.createBoard(10, 10)
 print(b.getName())
-print(b.printBoard())
-b.test()
+b.printBoard()
+
