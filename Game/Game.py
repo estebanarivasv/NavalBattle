@@ -22,7 +22,6 @@ def help():
     print(f"\t-\t Destructores: ocupan 2 casilleros\t(cantidad disponible: 1)")
     print(f"\t-\t Fragatas: ocupan 1 casillero\t\t(cantidad disponible: 2)")
     print("El juego se puede guardar y reanudarse en otro momento.")
-
     print(f"\nIntroducí 1 para volver atras.")
     op = int(input("Opcion: "))
     if op == 1:

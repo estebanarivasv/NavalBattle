@@ -57,13 +57,13 @@ class Boards:
                 # booleano que se usa para verificar que esten vacios los cuadros en los que deberia entrar el barco
                 place_chosen = False
                 for i in range(len(ship)):
-                    if self.__board[row + i][column] != 0:
+                    if self.__board[column + i][row] != 0:
                         place_chosen = True
                         print("Este casillero está ocupado. Por favor, definí una nueva posición.")
                         self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
                 if not place_chosen:
                     for i in range(len(ship)):
-                        self.__board[row + i][column] = ship[i]
+                        self.__board[column + i][row] = ship[i]
 
         elif orientation == "V":
             if column + len(ship) > 9:
@@ -72,13 +72,13 @@ class Boards:
             else:
                 place_chosen = False
                 for i in range(len(ship)):
-                    if self.__board[row][column + i] != 0:
+                    if self.__board[column][row + i] != 0:
                         place_chosen = True
                         print("Este casillero está ocupado. Por favor, definí una nueva posición.")
                         self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
                 if not place_chosen:
                     for i in range(len(ship)):
-                        self.__board[row][column + i] = ship[i]
+                        self.__board[column][row + i] = ship[i]
 
 
 '''EXCEPTION HANDLING'''
