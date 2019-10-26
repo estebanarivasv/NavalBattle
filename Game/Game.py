@@ -2,9 +2,10 @@ from Boards import *
 from Players import *
 from Ships import *
 
+
+"""Menu"""
 def createGame():
     identifyPlayers()
-
 
 def loadGame():
     pass
@@ -28,3 +29,6 @@ def help():
         menu()
     else:
         print("Has introducido un valor inválido.")
+
+
+createGame()
