@@ -1,33 +1,128 @@
-from Boards import *
 from Players import *
-from Ships import *
+from Boards import *
+from Main import *
 
 
-"""Menu"""
-def createGame():
-    identifyPlayers()
+class Game:
+    __player1 = Player()
+    __player2 = Player()
 
-def loadGame():
+    def __init__(self, player1, player2):
+        self.__player1 = player1
+        self.__player2 = player2
+
+    def setPlayer1(self, new_player1):
+        self.__player1 = new_player1
+
+    def setPlayer2(self, new_player2):
+        self.__player2 = new_player2
+
+    def getPlayer1(self):
+        return self.__player1
+
+    def getPlayer2(self):
+        return self.__player2
+
+    def shapeBoards(self):
+        self.__player1.defineBoards()
+        self.__player2.defineBoards()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def placeShips(player):
+    print(f"\nDispondremos los barcos en el tablero principal del jugador N°{player.getNumber()}: {player.getName()}")
+    a_c = 1
+    sub = 1
+    de = 1
+    fr = 2
+    while True:
+        if a_c > 0:
+            print(f"\n\nPosicioná tu portaaviones. Restantes {a_c}")
+            player.principal.printBoard()
+            print(
+                "¿En qué posición querés poner tu portaaviones? Primero especificá el numero de fila y después el "
+                "número de columna")
+            player.principal.insertShip(aircraft_carrier, editRowInfo(), editColumnInfo(), editOrientation())
+            a_c = a_c - 1
+            printPrincipal(player)
+
+        elif sub > 0:
+            print(f"\n\nPosicioná tu submarino. Restantes {sub}")
+            player.principal.printBoard()
+            print(
+                "¿En qué posición querés poner tu submarino? Primero especificá el numero de fila y después el "
+                "número de columna")
+            player.principal.insertShip(submarine, editRowInfo(), editColumnInfo(), editOrientation())
+            sub = sub - 1
+            printPrincipal(player)
+
+        elif de > 0:
+            print(f"\n\nPosicioná tu destructor. Restantes {de}")
+            player.principal.printBoard()
+            print(
+                "¿En qué posición querés poner tu destructor? Primero especificá el numero de fila y después el "
+                "número de columna")
+            player.principal.insertShip(destroyer, editRowInfo(), editColumnInfo(), editOrientation())
+            de = de - 1
+            printPrincipal(player)
+
+        elif fr > 0:
+            print(f"\n\nPosicioná tu fragata. Restantes {fr}")
+            player.principal.printBoard()
+            print(
+                "¿En qué posición querés poner tu fragata? Primero especificá el numero de fila y después el "
+                "número de columna")
+            player.principal.insertShip(frigate, editRowInfo(), editColumnInfo(), editOrientation())
+            fr = fr - 1
+            printPrincipal(player)
+
+        elif a_c == 0 and sub == 0 and de == 0 and fr == 0:
+            print("\n¡LISTO!")
+            pass
+
+
+def beginGame(player1, player2):
+    while not player1.principal.nomoreShips():
+        '''Verificar que hayan barcos por tirar.'''
+        '''Pedirle al jugador que dispare.'''
+        '''Modificar tablero posicion'''
+        '''for i in range(len(player1.))'''
+        '''Despues comparar'''
+        print(
+            f"\nPreparate jugador N°{player1.getNumber()}: {player1.getName()}. Tenés que adivinar dónde tiene los barcos el jugador N°{player2.getNumber()}")
+        '''compareBoards(player2, player1)'''
+
+
+'''def compareBoards(principal_board, positional_board):
+    print
     pass
 
-def help():
-    print("Estás en AYUDA")
-    print("Sólo puede haber dos jugadores: un jugador A y un jugador B.")
-    print("Ambos dispondrán de dos tableros de 10 columnas por 10 filas:")
-    print(f"\t-\tUn tablero POSICIÓN que le permitirá al jugador A posicionar sus barcos.")
-    print(f"\t-\tUn tablero PRINCIPAL que les permitirá al jugador A disparar a los barcos del jugador B.")
-    print("Los tipos de barcos que se pueden posicionar son cuatro:")
-    print(f"\t-\tPortaaviones: ocupan 4 casilleros\t(cantidad disponible: 1)")
-    print(f"\t-\t Submarinos: ocupan 3 casilleros\t(cantidad disponible: 1)")
-    print(f"\t-\t Destructores: ocupan 2 casilleros\t(cantidad disponible: 1)")
-    print(f"\t-\t Fragatas: ocupan 1 casillero\t\t(cantidad disponible: 2)")
-    print("El juego se puede guardar y reanudarse en otro momento.")
-    print(f"\nIntroducí 1 para volver atras.")
-    op = int(input("Opcion: "))
-    if op == 1:
-        menu()
-    else:
-        print("Has introducido un valor inválido.")
-
-
-createGame()
+def fire
+'''

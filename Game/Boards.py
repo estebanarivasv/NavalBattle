@@ -1,12 +1,13 @@
-from Ships import *
+class Board:
+    __name = " "
+    __rows = 0
+    __columns = 0
+    __board = []
 
-
-class Boards:
-    def __init__(self, name="", rows=0, columns=0):
+    def __init__(self, name, rows, columns):
         self.__name = name
         self.__rows = rows
         self.__columns = columns
-        self.__board = []
 
     def setName(self, new_name):
         self.__name = new_name
@@ -17,23 +18,30 @@ class Boards:
     def setColumns(self, new_columns):
         self.__columns = new_columns
 
+    def setBoard(self, new_board):
+        self.__board = new_board
+
     def getName(self):
         return self.__name
 
-    def setRows(self):
+    def getRows(self):
         return self.__rows
 
-    def setColumns(self):
+    def getColumns(self):
         return self.__columns
+
+    def getBoard(self):
+        return self.__board
 
     def createBoard(self):
         for i in range(self.__rows):
-            row = []
+            column = []
             for j in range(self.__columns):
-                row.append(0)
-            self.__board.append(row)
+                column.append(0)
+                ''' Inserta un cero en cada espacio de la columna'''
+            self.__board.append(column)
 
-    def printBoard(self):
+    def displayBoard(self):
         k = 0
         print("      ", k, "  ", k + 1, "  ", k + 2, "  ", k + 3, "  ", k + 4, "  ", k + 5, "  ", k + 6, "  ", k + 7,
               "  ", k + 8, "  ", k + 9)
@@ -44,14 +52,14 @@ class Boards:
                 print(x[i], end="    ")
             print()
 
-    def insertShip(self, ship, row, column, orientation):
+    def shipsPositioning(self, ship, row, column, orientation):
         """Orientation: horizontal (H) or vertical (V)"""
         # r = position_row
         # c = position_column
         # o = orientation
         if orientation == "H":
             if row + len(ship) > 9:
-                print("No es posible posicionar el barco aquí. Por favor, definí una nueva posición.")
+                print("No es posible posicionar el barco acá. Por favor, definí una nueva posición.")
                 self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
             else:
                 # booleano que se usa para verificar que esten vacios los cuadros en los que deberia entrar el barco
@@ -80,31 +88,11 @@ class Boards:
                     for i in range(len(ship)):
                         self.__board[column][row + i] = ship[i]
 
-
-'''EXCEPTION HANDLING'''
-
-def editRowInfo():
-    while True:
-        try:
-            row = int(input("Fila: "))
-            return row
-        except ValueError:
-            print("No ingresaste nada. Probá de nuevo.")
+    def noMoreShips(self):
+        ships_sank = self.__board.count("T")
+        if ships_sank == 11:
+            return True
+        elif 0 < ships_sank < 11:
+            return False
 
 
-def editColumnInfo():
-    try:
-        column = int(input("Columna: "))
-        return column
-    except ValueError:
-        print("No ingresaste nada. Probá de nuevo.")
-
-
-def editOrientation():
-    orientation = input("Orientación (H - horizontal, V - vertical): ")
-    if len(orientation) == 0:
-        print("No ingresaste nada. Probá de nuevo.")
-        editOrientation()
-    else:
-        orientation = orientation.upper()
-        return orientation

@@ -1,12 +1,21 @@
 from Boards import *
 from Ships import *
+from Validations import *
+
 
 class Player:
-    def __init__(self, name="", number=0):
+    __name = ""
+    __number = 0
+    __positional_board = []
+    __main_board = []
+    __ships = []
+
+    def __init__(self, name, number, positional_board, main_board, ships):
         self.__name = name
         self.__number = number
-        self.position = Boards("Posición", 10, 10)
-        self.principal = Boards("Principal", 10, 10)
+        self.__positional_board = positional_board
+        self.__main_board = main_board
+        self.__ships_number = ships
 
     def setName(self, new_name):
         self.__name = new_name
@@ -14,60 +23,32 @@ class Player:
     def setNumber(self, new_number):
         self.__number = new_number
 
+    def setPositionalBoard(self, new_positional_board):
+        self.__positional_board = new_positional_board
+
+    def setMainBoard(self, new_main_board):
+        self.__main_board = new_main_board
+
+    def setShipsNumber(self, new_ships_number):
+        self.__ships_number = new_ships_number
+
     def getName(self):
         return self.__name
 
     def getNumber(self):
         return self.__number
 
-def identifyPlayers():
-    print("Identificación de jugadores\n")
-    name1 = input("Ingrese el nombre del jugador 1: ")
-    name2 = input("Ingrese el nombre del jugador 2: ")
-    player1 = Player(name1, 1)
-    player2 = Player(name2, 2)
+    def getPositionalBoard(self):
+        return self.__positional_board
 
-    player1.principal.createBoard()
-    player2.principal.createBoard()
-    player1.position.createBoard()
-    player2.position.createBoard()
+    def getMainBoard(self):
+        return self.__main_board
 
-    placeShips(player1)
-    placeShips(player2)
+    def getShipsNumber(self):
+        return self.__ships_number
 
-def printPrincipal(player):
-    print("Tablero resultante: ")
-    player.principal.printBoard()
-    input("Presioná enter para seguir.")
+    def defineBoards(self):
+        self.__positional_board.createBoard()
+        self.__main_board.createBoard()
 
-
-
-
-def placeShips(player):
-    print(f"Dispondremos los barcos en el tablero principal del jugador N°{player.getNumber()}: {player.getName()}")
-    a_c = 1
-    sub = 1
-    de = 1
-    fr = 2
-    while True:
-        if a_c > 0:
-            print(f"Posicioná tu portaaviones. Restantes {a_c}")
-            player.principal.printBoard()
-            print("¿En qué posición querés poner tu portaaviones? Primero especificá el numero de fila y después el numero de columna")
-            row = int(input("Fila: "))
-            column = int(input("Columna: "))
-            orientation = input("Orientación (H - horizontal, V - vertical): ")
-            orientation = orientation.upper()
-            player.principal.insertShip(a_carrier, row, column, orientation)
-            a_c = a_c - 1
-            printPrincipal(player)
-
-        elif sub > 0:
-            print(f"Posicioná tu submarino. Restantes {sub}")
-        elif de > 0:
-            print(f"Posicioná tu destructor. Restantes {de}")
-        elif fr > 0:
-            print(f"Posicioná tu fragata. Restantes {fr}")
-        elif a_c == 0 and sub == 0 and de == 0 and fr == 0:
-            pass
-
+    '''def fire(self,):'''
