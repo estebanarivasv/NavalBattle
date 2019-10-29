@@ -6,12 +6,12 @@ from Boards import *
 
 print("¡Bienvenido a Naval Battle Game!")
 print("Seleccioná una opción para continuar:")
-print(f"1.  \tCrear partida",
+print(f"1.\tCrear partida",
       f"\n2.\tCargar partida guardada",
       f"\n3.\tAyuda",
       f"\n4.\tSalir")
 
-op = int(input("Opción: "))
+op = editMenuOption()
 
 cycle_menu = True
 while cycle_menu:
@@ -29,9 +29,9 @@ while cycle_menu:
         player1 = Player(name1, 1, positional_board, main_board, DEFAULT_NUMBER_SHIPS)
         player2 = Player(name2, 2, positional_board, main_board, DEFAULT_NUMBER_SHIPS)
 
-        game = Game(player1, player2)
+        naval_battle = Game(player1, player2)
 
-        game.shapeBoards()
+        naval_battle.shapeBoards()
 
 
 

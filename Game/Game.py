@@ -4,12 +4,10 @@ from Main import *
 
 
 class Game:
-    __player1 = Player()
-    __player2 = Player()
 
-    def __init__(self, player1, player2):
-        self.__player1 = player1
-        self.__player2 = player2
+    def __init__(self, plyr1, plyr2):
+        self.__player1 = plyr1
+        self.__player2 = plyr2
 
     def setPlayer1(self, new_player1):
         self.__player1 = new_player1
