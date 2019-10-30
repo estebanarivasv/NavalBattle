@@ -15,7 +15,7 @@ class Player:
         self.__number = number
         self.__positional_board = positional_board
         self.__main_board = main_board
-        self.__ships_number = ships
+        self.__ships = ships
 
     def setName(self, new_name):
         self.__name = new_name
@@ -29,8 +29,8 @@ class Player:
     def setMainBoard(self, new_main_board):
         self.__main_board = new_main_board
 
-    def setShipsNumber(self, new_ships_number):
-        self.__ships_number = new_ships_number
+    def setShipsNumber(self, new_ships):
+        self.__ships = new_ships
 
     def getName(self):
         return self.__name
@@ -45,10 +45,13 @@ class Player:
         return self.__main_board
 
     def getShipsNumber(self):
-        return self.__ships_number
+        return self.__ships
 
     def defineBoards(self):
         self.__positional_board.createBoard()
         self.__main_board.createBoard()
+
+    def locateShipsInMainBoard(self):
+        self.__main_board.shipsPositioning(self.__ships)
 
     '''def fire(self,):'''

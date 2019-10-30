@@ -23,20 +23,19 @@ while cycle_menu:
         name1 = input("Ingrese el nombre del jugador 1: ")
         name2 = input("Ingrese el nombre del jugador 2: ")
 
-        positional_board = Board("Tablero Posición", DEFAULT_ROWS_NUM, DEFAULT_COLUMNS_NUM)
-        main_board = Board("Tablero Principal", DEFAULT_ROWS_NUM, DEFAULT_COLUMNS_NUM)
+        positional_board = Board("Tablero Posición", DEFAULT_BOARDS_ROWS_NUM, DEFAULT_BOARDS_COLUMNS_NUM)
+        main_board = Board("Tablero Principal", DEFAULT_BOARDS_ROWS_NUM, DEFAULT_BOARDS_COLUMNS_NUM)
 
-        player1 = Player(name1, 1, positional_board, main_board, DEFAULT_NUMBER_SHIPS)
-        player2 = Player(name2, 2, positional_board, main_board, DEFAULT_NUMBER_SHIPS)
+        player1 = Player(name1, 1, positional_board, main_board, createShips())
+        player2 = Player(name2, 2, positional_board, main_board, createShips())
 
         naval_battle = Game(player1, player2)
 
         naval_battle.shapeBoards()
 
+        naval_battle.placeShips()
 
 
-        placeShips(player1)
-        placeShips(player2)
 
 
 

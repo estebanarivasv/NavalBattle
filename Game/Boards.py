@@ -1,3 +1,7 @@
+from Validations import *
+from Ships import *
+
+
 class Board:
     __name = " "
     __rows = 0
@@ -52,47 +56,54 @@ class Board:
                 print(x[i], end="    ")
             print()
 
-    def shipsPositioning(self, ship, row, column, orientation):
+    def shipsPositioning(self, ships):
         """Orientation: horizontal (H) or vertical (V)"""
         # r = position_row
         # c = position_column
         # o = orientation
-        if orientation == "H":
-            if row + len(ship) > 9:
-                print("No es posible posicionar el barco acá. Por favor, definí una nueva posición.")
-                self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-            else:
-                # booleano que se usa para verificar que esten vacios los cuadros en los que deberia entrar el barco
-                place_chosen = False
-                for i in range(len(ship)):
-                    if self.__board[column + i][row] != 0:
-                        place_chosen = True
-                        print("Este casillero está ocupado. Por favor, definí una nueva posición.")
-                        self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-                if not place_chosen:
+
+        for i in ships:
+            self.displayBoard()
+            ships[i].setPosition()
+            position = ships[i].getPosition()
+            row = position[0]
+            column = position[1]
+            orientation = position[2]
+
+            '''if orientation == "H":
+                if row + len(ship) > 9:
+                    print("No es posible posicionar el barco acá. Por favor, definí una nueva posición.")
+                    self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
+                else:
+                    # booleano que se usa para verificar que esten vacios los cuadros en los que deberia entrar el barco
+                    place_chosen = False
                     for i in range(len(ship)):
-                        self.__board[column + i][row] = ship[i]
+                        if self.__board[column + i][row] != 0:
+                            place_chosen = True
+                            print("Este casillero está ocupado. Por favor, definí una nueva posición.")
+                            self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
+                    if not place_chosen:
+                        for i in range(len(ship)):
+                            self.__board[column + i][row] = ship[i]
 
-        elif orientation == "V":
-            if column + len(ship) > 9:
-                print("No es posible posicionar el barco aquí. Por favor, definí una nueva posicion")
-                self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-            else:
-                place_chosen = False
-                for i in range(len(ship)):
-                    if self.__board[column][row + i] != 0:
-                        place_chosen = True
-                        print("Este casillero está ocupado. Por favor, definí una nueva posición.")
-                        self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-                if not place_chosen:
+            elif orientation == "V":
+                if column + len(ship) > 9:
+                    print("No es posible posicionar el barco aquí. Por favor, definí una nueva posicion")
+                    self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
+                else:
+                    place_chosen = False
                     for i in range(len(ship)):
-                        self.__board[column][row + i] = ship[i]
+                        if self.__board[column][row + i] != 0:
+                            place_chosen = True
+                            print("Este casillero está ocupado. Por favor, definí una nueva posición.")
+                            self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
+                    if not place_chosen:
+                        for i in range(len(ship)):
+                            self.__board[column][row + i] = ship[i]'''
 
-    def noMoreShips(self):
-        ships_sank = self.__board.count("T")
-        if ships_sank == 11:
-            return True
-        elif 0 < ships_sank < 11:
-            return False
-
-
+        def noMoreShips(self):
+            ships_sank = self.__board.count("T")
+            if ships_sank == 11:
+                return True
+            elif 0 < ships_sank < 11:
+                return False

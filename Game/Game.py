@@ -25,6 +25,10 @@ class Game:
         self.__player1.defineBoards()
         self.__player2.defineBoards()
 
+    def placeShips(self):
+        self.__player1.locateShipsInMainBoard()
+        self.__player2.locateShipsInMainBoard()
+
 
 
 
