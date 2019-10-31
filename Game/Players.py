@@ -52,6 +52,7 @@ class Player:
         self.__main_board.createBoard()
 
     def locateShipsInMainBoard(self):
-        self.__main_board.shipsPositioning(self.__ships)
+        print(f"\n\nDefiniremos el tablero del jugador N°{self.getNumber()}: {self.getName()}")
+        self.__main_board.shipsPosition(self.__ships)
 
     '''def fire(self,):'''

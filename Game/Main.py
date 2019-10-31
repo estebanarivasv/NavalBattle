@@ -69,3 +69,4 @@ while cycle_menu:
 
     else:
         print("Has introducido un valor inválido.")
+        op = editMenuOption()

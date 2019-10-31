@@ -38,6 +38,7 @@ class Board:
         return self.__board
 
     def createBoard(self):
+        self.__board = []
         for i in range(self.__rows):
             column = []
             for j in range(self.__columns):
@@ -46,6 +47,7 @@ class Board:
             self.__board.append(column)
 
     def displayBoard(self):
+        print(f"\n{self.__name}:\n")
         k = 0
         print("      ", k, "  ", k + 1, "  ", k + 2, "  ", k + 3, "  ", k + 4, "  ", k + 5, "  ", k + 6, "  ", k + 7,
               "  ", k + 8, "  ", k + 9)
@@ -56,54 +58,48 @@ class Board:
                 print(x[i], end="    ")
             print()
 
-    def shipsPositioning(self, ships):
-        """Orientation: horizontal (H) or vertical (V)"""
-        # r = position_row
-        # c = position_column
-        # o = orientation
+    def areTheBoxesFree(self, ship_length, position):
+        row = position[0]
+        column = position[1]
+        orientation = position[2]
 
-        for i in ships:
+        if orientation == "H":
+            for j in range(ship_length):
+                if self.__board[column + j][row] != 0:
+                    return False
+                if self.__board[column + j][row] == 0:
+                    return True
+
+        elif orientation == "V":
+            for i in range(ship_length):
+                if self.__board[column][row + i] != 0:
+                    return False
+                if self.__board[column][row + i] == 0:
+                    return True
+
+    def insertValue(self, column, row, value):
+        self.__board[column][row] = value
+
+    def shipsPosition(self, ships):
+        total_ships_coordinates = []
+        for i in range(len(ships)):
             self.displayBoard()
-            ships[i].setPosition()
-            position = ships[i].getPosition()
-            row = position[0]
-            column = position[1]
-            orientation = position[2]
+            ships[i].setInitialPosition()
+            position = ships[i].getInitialPosition()
+            ship_length = ships[i].getLength()
 
-            '''if orientation == "H":
-                if row + len(ship) > 9:
-                    print("No es posible posicionar el barco acá. Por favor, definí una nueva posición.")
-                    self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-                else:
-                    # booleano que se usa para verificar que esten vacios los cuadros en los que deberia entrar el barco
-                    place_chosen = False
-                    for i in range(len(ship)):
-                        if self.__board[column + i][row] != 0:
-                            place_chosen = True
-                            print("Este casillero está ocupado. Por favor, definí una nueva posición.")
-                            self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-                    if not place_chosen:
-                        for i in range(len(ship)):
-                            self.__board[column + i][row] = ship[i]
+            while True:
+                if self.areTheBoxesFree(ship_length, position):
+                    coordinates = ships[i].setFinalCoordinates()
+                    for k in coordinates:
+                        column = k[0]
+                        row = k[1]
+                        self.insertValue(column, row, ships[i].getId())
+                    break
 
-            elif orientation == "V":
-                if column + len(ship) > 9:
-                    print("No es posible posicionar el barco aquí. Por favor, definí una nueva posicion")
-                    self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-                else:
-                    place_chosen = False
-                    for i in range(len(ship)):
-                        if self.__board[column][row + i] != 0:
-                            place_chosen = True
-                            print("Este casillero está ocupado. Por favor, definí una nueva posición.")
-                            self.insertShip(ship, editRowInfo(), editColumnInfo(), editOrientation())
-                    if not place_chosen:
-                        for i in range(len(ship)):
-                            self.__board[column][row + i] = ship[i]'''
+                elif not self.areTheBoxesFree(ship_length, position):
+                    self.displayBoard()
+                    print("Este casillero está ocupado. Por favor, definí una nueva posición.")
+                    ships[i].setInitialPosition()
 
-        def noMoreShips(self):
-            ships_sank = self.__board.count("T")
-            if ships_sank == 11:
-                return True
-            elif 0 < ships_sank < 11:
-                return False
+        return total_ships_coordinates

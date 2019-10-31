@@ -30,8 +30,10 @@ def editOrientation():
         orientation = input("Orientación (H - horizontal, V - vertical): ")
         if len(orientation) == 0:
             print("No ingresaste nada. Probá de nuevo.")
-        elif orientation != "V" or orientation != "H":
-            print("Ingresaste un valor incorrecto.")
-        else:
+        elif orientation == "v" or orientation == "h":
             orientation = orientation.upper()
             return orientation
+        elif orientation == "V" or orientation == "H":
+            return orientation
+        else:
+            print("Ingresaste un valor incorrecto.")

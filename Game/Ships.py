@@ -6,7 +6,8 @@ class Ship:
     __name = ""
     __letter_id = 0
     __length = 0
-    __position = ()
+    __initial_position = ()
+    __final_coordinates = []
 
     def __init__(self, name, letter_id, length):
         self.__name = name
@@ -22,23 +23,38 @@ class Ship:
     def setLength(self, new_length):
         self.__length = new_length
 
-    def setPosition(self):
+    def setInitialPosition(self):
         while True:
-            print("¿En qué fila querés posicionar tu barco?")
+            print(f"\n¿En qué fila querés posicionar a tu {self.getName().lower()}?")
             row = editRowInfo()
-            print("¿En qué columna querés posicionar tu barco?")
+            print(f"¿En qué columna querés posicionar a tu {self.getName().lower()}?")
             column = editColumnInfo()
-            print("¿Qué orientación le querés dar al barco?")
+            print(f"¿Qué orientación le querés dar al {self.getName().lower()}?")
             orientation = editOrientation()
 
-            if (row + self.__length) < DEFAULT_BOARDS_ROWS_NUM and orientation == "H":
-                self.__position = (row, column, orientation)
-                return self.__position
-            elif (column + self.__length) < DEFAULT_BOARDS_COLUMNS_NUM and orientation == "V":
-                self.__position = (row, column, orientation)
-                return self.__position
+            if (column + self.__length) < DEFAULT_BOARDS_ROWS_NUM and orientation == "H":
+                self.__initial_position = (row, column, orientation)
+                return self.__initial_position
+            elif (row + self.__length) < DEFAULT_BOARDS_COLUMNS_NUM and orientation == "V":
+                self.__initial_position = (row, column, orientation)
+                return self.__initial_position
             else:
                 print("Tu barco no se puede posicionar en las coordenadas que diste. Intentá de nuevo.")
+
+    def setFinalCoordinates(self):
+        row = self.__initial_position[0]
+        column = self.__initial_position[1]
+        orientation = self.__initial_position[2]
+        ship_coordinates = []
+        if orientation == "H":
+            for i in range(self.__length):
+                coordinates = (column + i, row)
+                ship_coordinates.append(coordinates)
+        elif orientation == "V":
+            for i in range(self.__length):
+                coordinates = (column, row + i)
+                ship_coordinates.append(coordinates)
+        return ship_coordinates
 
     def getName(self):
         return self.__name
@@ -49,8 +65,11 @@ class Ship:
     def getLength(self):
         return self.__length
 
-    def getPosition(self):
-        return self.__position
+    def getInitialPosition(self):
+        return self.__initial_position
+
+    def getFinalCoordinates(self):
+        return self.__final_coordinates
 
 
 def createShips():
