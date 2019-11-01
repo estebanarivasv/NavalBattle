@@ -83,14 +83,14 @@ class Board:
         orientation = position[2]
 
         if orientation == "H":
-            for j in range(ship_length - 1):
+            for j in range(ship_length):
                 if self.__board[column + j][row] != 0:
                     return False
                 if self.__board[column + j][row] == 0:
                     return True
 
         elif orientation == "V":
-            for i in range(ship_length - 1):
+            for i in range(ship_length):
                 if self.__board[column][row + i] != 0:
                     return False
                 if self.__board[column][row + i] == 0:
@@ -102,10 +102,10 @@ class Board:
     def shipsPosition(self, ships):
         for i in range(len(ships)):
             self.displayBoard()
-            ships[i].setInitialPosition()
-            position = ships[i].getInitialPosition()
             ship_length = ships[i].getLength()
             while True:
+                ships[i].setInitialPosition()
+                position = ships[i].getInitialPosition()
                 if self.areTheBoxesFree(ship_length, position):
                     coordinates = ships[i].setFinalCoordinates()
                     for k in coordinates:
@@ -114,9 +114,12 @@ class Board:
                         self.insertValue(column, row, ships[i].getId())
                     break
                 elif not self.areTheBoxesFree(ship_length, position):
+                    column = position[0]
+                    row = position[1]
+                    orientation = position[2]
+                    print(column, " ", row, " ", orientation)
                     self.displayBoard()
                     print("Este casillero está ocupado. Por favor, definí una nueva posición.")
-                    ships[i].setInitialPosition()
 
     def isThereAShip(self, column, row):
         for i in range(len(self.__placed_ships)):
