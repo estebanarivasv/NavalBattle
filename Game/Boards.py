@@ -7,6 +7,7 @@ class Board:
     __rows = 0
     __columns = 0
     __board = []
+    __placed_ships = []
 
     def __init__(self, name, rows, columns):
         self.__name = name
@@ -25,6 +26,12 @@ class Board:
     def setBoard(self, new_board):
         self.__board = new_board
 
+    def setPlacedShips(self, ships):
+        self.__placed_ships = []
+        for i in ships:
+            coordinates = i.getFinalCoordinates()
+            self.__placed_ships.append(coordinates)
+
     def getName(self):
         return self.__name
 
@@ -37,13 +44,25 @@ class Board:
     def getBoard(self):
         return self.__board
 
-    def createBoard(self):
+    def getPlacedShips(self):
+        return self.__placed_ships
+
+    def createMainBoard(self):
         self.__board = []
         for i in range(self.__rows):
             column = []
             for j in range(self.__columns):
                 column.append(0)
                 ''' Inserta un cero en cada espacio de la columna'''
+            self.__board.append(column)
+
+    def createPositionalBoard(self):
+        self.__board = []
+        for i in range(self.__rows):
+            column = []
+            for j in range(self.__columns):
+                column.append("*")
+                ''' Inserta un * en cada espacio de la columna'''
             self.__board.append(column)
 
     def displayBoard(self):
@@ -81,13 +100,11 @@ class Board:
         self.__board[column][row] = value
 
     def shipsPosition(self, ships):
-        total_ships_coordinates = []
         for i in range(len(ships)):
             self.displayBoard()
             ships[i].setInitialPosition()
             position = ships[i].getInitialPosition()
             ship_length = ships[i].getLength()
-
             while True:
                 if self.areTheBoxesFree(ship_length, position):
                     coordinates = ships[i].setFinalCoordinates()
@@ -96,10 +113,21 @@ class Board:
                         row = k[1]
                         self.insertValue(column, row, ships[i].getId())
                     break
-
                 elif not self.areTheBoxesFree(ship_length, position):
                     self.displayBoard()
                     print("Este casillero está ocupado. Por favor, definí una nueva posición.")
                     ships[i].setInitialPosition()
 
-        return total_ships_coordinates
+    def isThereAShip(self, column, row):
+        for i in range(len(self.__placed_ships)):
+            for j in self.__placed_ships[i]:
+                if j == (column, row):
+                    return True
+                else:
+                    return False
+
+    def deleteSankPart(self, column, row):
+        for i in range(len(self.__placed_ships)):
+            for j in self.__placed_ships[i]:
+                if j == (column, row):
+                    del[j]

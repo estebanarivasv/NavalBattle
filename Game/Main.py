@@ -35,17 +35,9 @@ while cycle_menu:
 
         naval_battle.placeShips()
 
+        naval_battle.startWar()
 
-
-
-
-
-
-
-
-
-
-
+        naval_battle.endGame()
 
     elif op == 2:
         '''Vamos a ver si se llega a cargar el juego'''

@@ -48,11 +48,31 @@ class Player:
         return self.__ships
 
     def defineBoards(self):
-        self.__positional_board.createBoard()
-        self.__main_board.createBoard()
+        self.__positional_board.createPositionalBoard()
+        self.__main_board.createMainBoard()
 
     def locateShipsInMainBoard(self):
         print(f"\n\nDefiniremos el tablero del jugador N°{self.getNumber()}: {self.getName()}")
         self.__main_board.shipsPosition(self.__ships)
 
-    '''def fire(self,):'''
+    def attack(self, enemy):
+        while True:
+            self.__positional_board.displayBoard()
+            print("\nIngresá la coordenada donde querés atacar.")
+            coordinate = (editRowInfo(), editColumnInfo())
+            row = coordinate[0]
+            column = coordinate[1]
+            if enemy.__main_board.isThereAShip(column, row):
+                self.__positional_board[column][row] = enemy.__main_board[column][row]
+                print("¡Tocado! Tenés otro turno")
+                self.__positional_board.deleteSankPart(column, row)
+                self.__positional_board.displayBoard()
+
+            elif not enemy.__main_board.isThereAShip(column, row):
+                self.__positional_board[column][row] = DEFAULT_WATER_ID_POSITION_BOARD
+                print("¡Agua!")
+                self.__positional_board.displayBoard()
+                return False
+
+
+
