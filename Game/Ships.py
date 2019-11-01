@@ -32,10 +32,10 @@ class Ship:
             print(f"¿Qué orientación le querés dar al {self.getName().lower()}?")
             orientation = editOrientation()
 
-            if (column + self.__length) < DEFAULT_BOARDS_ROWS_NUM and orientation == "H":
+            if (column + (self.__length - 1)) < DEFAULT_BOARDS_ROWS_NUM and orientation == "H":
                 self.__initial_position = (row, column, orientation)
                 return self.__initial_position
-            elif (row + self.__length) < DEFAULT_BOARDS_COLUMNS_NUM and orientation == "V":
+            elif (row + (self.__length - 1)) < DEFAULT_BOARDS_COLUMNS_NUM and orientation == "V":
                 self.__initial_position = (row, column, orientation)
                 return self.__initial_position
             else:

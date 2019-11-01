@@ -29,7 +29,7 @@ class Player:
     def setMainBoard(self, new_main_board):
         self.__main_board = new_main_board
 
-    def setShipsNumber(self, new_ships):
+    def setShips(self, new_ships):
         self.__ships = new_ships
 
     def getName(self):
@@ -44,7 +44,7 @@ class Player:
     def getMainBoard(self):
         return self.__main_board
 
-    def getShipsNumber(self):
+    def getShips(self):
         return self.__ships
 
     def defineBoards(self):

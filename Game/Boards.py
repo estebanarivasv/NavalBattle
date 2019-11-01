@@ -83,14 +83,14 @@ class Board:
         orientation = position[2]
 
         if orientation == "H":
-            for j in range(ship_length):
+            for j in range(ship_length - 1):
                 if self.__board[column + j][row] != 0:
                     return False
                 if self.__board[column + j][row] == 0:
                     return True
 
         elif orientation == "V":
-            for i in range(ship_length):
+            for i in range(ship_length - 1):
                 if self.__board[column][row + i] != 0:
                     return False
                 if self.__board[column][row + i] == 0:

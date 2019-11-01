@@ -29,7 +29,7 @@ class Game:
         self.__player2.locateShipsInMainBoard()
 
     def startWar(self):
-        while not (self.__player1.__main_board.getPlacedShips() == [] or self.__player2.__main_board.getPlacedShips() == []):
+        while not (self.__player1.getMainBoard().getPlacedShips() == [] or self.__player2.getMainBoard().getPlacedShips() == []):
             self.__player1.attack(self.__player2)
             self.__player2.attack(self.__player1)
 
