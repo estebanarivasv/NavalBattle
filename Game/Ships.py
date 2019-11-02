@@ -32,10 +32,10 @@ class Ship:
             print(f"¿Qué orientación le querés dar al {self.getName().lower()}?")
             orientation = editOrientation()
 
-            if (column + (self.__length - 1)) < DEFAULT_BOARDS_ROWS_NUM and orientation == "H":
+            if ((column - 1) + self.__length) < DEFAULT_BOARDS_COLUMNS_NUM and row < DEFAULT_BOARDS_ROWS_NUM and orientation == "H":
                 self.__initial_position = (row, column, orientation)
                 return self.__initial_position
-            elif (row + (self.__length - 1)) < DEFAULT_BOARDS_COLUMNS_NUM and orientation == "V":
+            elif ((row - 1) + self.__length) < DEFAULT_BOARDS_ROWS_NUM and column < DEFAULT_BOARDS_COLUMNS_NUM and orientation == "V":
                 self.__initial_position = (row, column, orientation)
                 return self.__initial_position
             else:
@@ -71,24 +71,3 @@ class Ship:
     def getFinalCoordinates(self):
         return self.__final_coordinates
 
-
-def createShips():
-    ships = []
-
-    for i in range(DEFAULT_NUMBER_OF_AC):
-        aircraft_carrier = Ship("Portaaviones", AIRCRAFT_CARRIER_ID, DEFAULT_AC_LENGTH)
-        ships.append(aircraft_carrier)
-
-    for i in range(DEFAULT_NUMBER_OF_SUB):
-        submarine = Ship("Submarino", SUBMARINE_ID, DEFAULT_SUB_LENGTH)
-        ships.append(submarine)
-
-    for i in range(DEFAULT_NUMBER_OF_DES):
-        destroyer = Ship("Destructor", DESTROYER_ID, DEFAULT_DES_LENGTH)
-        ships.append(destroyer)
-
-    for i in range(DEFAULT_NUMBER_OF_FRI):
-        frigate = Ship("Fragata", FRIGATE_ID, DEFAULT_FRI_LENGTH)
-        ships.append(frigate)
-
-    return ships

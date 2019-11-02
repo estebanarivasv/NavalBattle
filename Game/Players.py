@@ -52,26 +52,31 @@ class Player:
         self.__main_board.createMainBoard()
 
     def locateShipsInMainBoard(self):
-        print(f"\n\nDefiniremos el tablero del jugador N°{self.getNumber()}: {self.getName()}")
+        print(f"\n\n=======================================================\n"
+              f"Definiremos el tablero del jugador N°{self.getNumber()}: {self.getName()}")
         self.__main_board.shipsPosition(self.__ships)
 
     def attack(self, enemy):
         while True:
+            print(f"\n\n=======================================================\n"
+                  f"\nTurno del jugador N°{self.getNumber()}: {self.getName()}")
             self.__positional_board.displayBoard()
             print("\nIngresá la coordenada donde querés atacar.")
             coordinate = (editRowInfo(), editColumnInfo())
             row = coordinate[0]
             column = coordinate[1]
-            if enemy.__main_board.isThereAShip(column, row):
-                self.__positional_board[column][row] = enemy.__main_board[column][row]
-                print("¡Tocado! Tenés otro turno")
-                self.__positional_board.deleteSankPart(column, row)
-                self.__positional_board.displayBoard()
+            print
 
-            elif not enemy.__main_board.isThereAShip(column, row):
-                self.__positional_board[column][row] = DEFAULT_WATER_ID_POSITION_BOARD
+            if enemy.getMainBoard().isThereAShip(column, row):
+                self.getPositionalBoard().getBoard()[column][row] = enemy.getMainBoard().getBoard()[column][row]
+                print("¡Tocado! Tenés otro turno.")
+                self.getPositionalBoard().deleteSankPart(column, row)
+                self.getPositionalBoard().displayBoard()
+
+            elif not enemy.getMainBoard().isThereAShip(column, row):
+                self.getPositionalBoard().getBoard()[column][row] = DEFAULT_WATER_ID_POSITION_BOARD
                 print("¡Agua!")
-                self.__positional_board.displayBoard()
+                self.getPositionalBoard().displayBoard()
                 return False
 
 

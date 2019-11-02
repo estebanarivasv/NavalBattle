@@ -112,6 +112,7 @@ class Board:
                         column = k[0]
                         row = k[1]
                         self.insertValue(column, row, ships[i].getId())
+                    self.__placed_ships.append(coordinates)
                     break
                 elif not self.areTheBoxesFree(ship_length, position):
                     column = position[0]
@@ -120,13 +121,19 @@ class Board:
                     print(column, " ", row, " ", orientation)
                     self.displayBoard()
                     print("Este casillero está ocupado. Por favor, definí una nueva posición.")
+            self.displayBoard()
+        print(f"\n\n=======================================================\n\n")
 
     def isThereAShip(self, column, row):
+        print(self.__placed_ships)
         for i in range(len(self.__placed_ships)):
             for j in self.__placed_ships[i]:
+                print("Barco:", j)
                 if j == (column, row):
+                    print("COINCIDE", j)
                     return True
                 else:
+                    print("NO COINCIDE")
                     return False
 
     def deleteSankPart(self, column, row):

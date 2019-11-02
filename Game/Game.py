@@ -39,8 +39,8 @@ class Game:
     def endGame(self):
         print("\n\n¡Juego terminado!")
         if not self.__player1.getMainBoard().getPlacedShips():
-            print(f"JUGADOR GANADOR N°{self.__player2.getNumber}: {self.__player2.getName}")
+            print(f"JUGADOR GANADOR N°{self.__player2.getNumber()}: {self.__player2.getName()}")
         elif not self.__player2.getMainBoard().getPlacedShips():
-            print(f"JUGADOR GANADOR N°{self.__player1.getNumber}: {self.__player1.getName}")
+            print(f"JUGADOR GANADOR N°{self.__player1.getNumber()}: {self.__player1.getName()}")
 
 
