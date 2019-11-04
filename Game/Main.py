@@ -32,38 +32,38 @@ while cycle_menu:
         ships_player1 = []
 
         for i in range(DEFAULT_NUMBER_OF_AC):
-            aircraft_carrier = Ship("Portaaviones", AIRCRAFT_CARRIER_ID, DEFAULT_AC_LENGTH)
-            ships_player1.append(aircraft_carrier)
+            aircraft_carrier1 = Ship("Portaaviones", AIRCRAFT_CARRIER_ID, DEFAULT_AC_LENGTH)
+            ships_player1.append(aircraft_carrier1)
 
         for i in range(DEFAULT_NUMBER_OF_SUB):
-            submarine = Ship("Submarino", SUBMARINE_ID, DEFAULT_SUB_LENGTH)
-            ships_player1.append(submarine)
+            submarine1 = Ship("Submarino", SUBMARINE_ID, DEFAULT_SUB_LENGTH)
+            ships_player1.append(submarine1)
 
         for i in range(DEFAULT_NUMBER_OF_DES):
-            destroyer = Ship("Destructor", DESTROYER_ID, DEFAULT_DES_LENGTH)
-            ships_player1.append(destroyer)
+            destroyer1 = Ship("Destructor", DESTROYER_ID, DEFAULT_DES_LENGTH)
+            ships_player1.append(destroyer1)
 
         for i in range(DEFAULT_NUMBER_OF_FRI):
-            frigate = Ship("Fragata", FRIGATE_ID, DEFAULT_FRI_LENGTH)
-            ships_player1.append(frigate)
+            frigate1 = Ship("Fragata", FRIGATE_ID, DEFAULT_FRI_LENGTH)
+            ships_player1.append(frigate1)
 
         ships_player2 = []
 
         for i in range(DEFAULT_NUMBER_OF_AC):
-            aircraft_carrier = Ship("Portaaviones", AIRCRAFT_CARRIER_ID, DEFAULT_AC_LENGTH)
-            ships_player2.append(aircraft_carrier)
+            aircraft_carrier2 = Ship("Portaaviones", AIRCRAFT_CARRIER_ID, DEFAULT_AC_LENGTH)
+            ships_player2.append(aircraft_carrier2)
 
         for i in range(DEFAULT_NUMBER_OF_SUB):
-            submarine = Ship("Submarino", SUBMARINE_ID, DEFAULT_SUB_LENGTH)
-            ships_player2.append(submarine)
+            submarine2 = Ship("Submarino", SUBMARINE_ID, DEFAULT_SUB_LENGTH)
+            ships_player2.append(submarine2)
 
         for i in range(DEFAULT_NUMBER_OF_DES):
-            destroyer = Ship("Destructor", DESTROYER_ID, DEFAULT_DES_LENGTH)
-            ships_player2.append(destroyer)
+            destroyer2 = Ship("Destructor", DESTROYER_ID, DEFAULT_DES_LENGTH)
+            ships_player2.append(destroyer2)
 
         for i in range(DEFAULT_NUMBER_OF_FRI):
-            frigate = Ship("Fragata", FRIGATE_ID, DEFAULT_FRI_LENGTH)
-            ships_player2.append(frigate)
+            frigate2 = Ship("Fragata", FRIGATE_ID, DEFAULT_FRI_LENGTH)
+            ships_player2.append(frigate2)
 
         player1 = Player(name1, 1, positional_board_player1, main_board_player1, ships_player1)
         player2 = Player(name2, 2, positional_board_player2, main_board_player2, ships_player2)

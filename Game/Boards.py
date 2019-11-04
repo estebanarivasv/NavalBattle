@@ -2,12 +2,20 @@ from Validations import *
 from Ships import *
 
 
+def canFireBomb(column, row):
+    if column < DEFAULT_BOARDS_COLUMNS_NUM and row < DEFAULT_BOARDS_ROWS_NUM:
+        return True
+    else:
+        return False
+
+
 class Board:
     __name = " "
     __rows = 0
     __columns = 0
     __board = []
     __placed_ships = []
+    __deleted_ships_parts = []
 
     def __init__(self, name, rows, columns):
         self.__name = name
@@ -26,11 +34,11 @@ class Board:
     def setBoard(self, new_board):
         self.__board = new_board
 
-    def setPlacedShips(self, ships):
-        self.__placed_ships = []
-        for i in ships:
-            coordinates = i.getFinalCoordinates()
-            self.__placed_ships.append(coordinates)
+    def setPlacedShips(self, new__placed_ships):
+        self.__placed_ships = new__placed_ships
+
+    def setDeletedShipsParts(self, new_deleted_ships_parts):
+        self.__deleted_ships_parts = new_deleted_ships_parts
 
     def getName(self):
         return self.__name
@@ -46,6 +54,9 @@ class Board:
 
     def getPlacedShips(self):
         return self.__placed_ships
+
+    def getDeletedShipsParts(self):
+        return self.__deleted_ships_parts
 
     def createMainBoard(self):
         self.__board = []
@@ -99,45 +110,22 @@ class Board:
     def insertValue(self, column, row, value):
         self.__board[column][row] = value
 
-    def shipsPosition(self, ships):
-        for i in range(len(ships)):
-            self.displayBoard()
-            ship_length = ships[i].getLength()
-            while True:
-                ships[i].setInitialPosition()
-                position = ships[i].getInitialPosition()
-                if self.areTheBoxesFree(ship_length, position):
-                    coordinates = ships[i].setFinalCoordinates()
-                    for k in coordinates:
-                        column = k[0]
-                        row = k[1]
-                        self.insertValue(column, row, ships[i].getId())
-                    self.__placed_ships.append(coordinates)
-                    break
-                elif not self.areTheBoxesFree(ship_length, position):
-                    column = position[0]
-                    row = position[1]
-                    orientation = position[2]
-                    print(column, " ", row, " ", orientation)
-                    self.displayBoard()
-                    print("Este casillero está ocupado. Por favor, definí una nueva posición.")
-            self.displayBoard()
-        print(f"\n\n=======================================================\n\n")
-
-    def isThereAShip(self, column, row):
-        print(self.__placed_ships)
+    def isThereAShip(self, coordinate):
         for i in range(len(self.__placed_ships)):
             for j in self.__placed_ships[i]:
-                print("Barco:", j)
-                if j == (column, row):
-                    print("COINCIDE", j)
+                if j == coordinate:
                     return True
                 else:
-                    print("NO COINCIDE")
                     return False
 
     def deleteSankPart(self, column, row):
+        print("barcos ahi before ", self.__placed_ships)
         for i in range(len(self.__placed_ships)):
             for j in self.__placed_ships[i]:
                 if j == (column, row):
-                    del[j]
+                    print("elemento: ", j)
+                    self.__placed_ships[i].remove(j)
+                    self.__deleted_ships_parts.append(j)
+                else:
+                    pass
+        print("barcos ahi after", self.__placed_ships)

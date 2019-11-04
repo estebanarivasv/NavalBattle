@@ -28,13 +28,19 @@ class Game:
         self.__player1.locateShipsInMainBoard()
         self.__player2.locateShipsInMainBoard()
 
+        print(self.__player1.getMainBoard().getPlacedShips())
+        print(self.__player2.getMainBoard().getPlacedShips())
+
     def startWar(self):
         while True:
-            self.__player1.attack(self.__player2)
-            self.__player2.attack(self.__player1)
-            if self.__player1.getMainBoard().getPlacedShips() == [] or self.__player2.getMainBoard().getPlacedShips() == []:
-                break
+            placed_ships_player1 = self.__player1.getMainBoard().getPlacedShips()
+            placed_ships_player2 = self.__player2.getMainBoard().getPlacedShips()
 
+            if placed_ships_player1 == [] or placed_ships_player2 == []:
+                break
+            else:
+                self.__player1.attack(self.__player2)
+                self.__player2.attack(self.__player1)
 
     def endGame(self):
         print("\n\n¡Juego terminado!")
@@ -42,5 +48,3 @@ class Game:
             print(f"JUGADOR GANADOR N°{self.__player2.getNumber()}: {self.__player2.getName()}")
         elif not self.__player2.getMainBoard().getPlacedShips():
             print(f"JUGADOR GANADOR N°{self.__player1.getNumber()}: {self.__player1.getName()}")
-
-
