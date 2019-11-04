@@ -48,7 +48,3 @@ class Game:
                 print("\n\n¡Juego terminado!")
                 print(f"JUGADOR GANADOR N°{self.__player1.getNumber()}: {self.__player1.getName()}")
                 break
-
-
-
-
