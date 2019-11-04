@@ -8,6 +8,7 @@ class Player:
     __positional_board = []
     __main_board = []
     __ships = []
+    __terminate_game = False
 
     def __init__(self, name, number, positional_board, main_board, ships):
         self.__name = name
@@ -31,6 +32,9 @@ class Player:
     def setShips(self, new_ships):
         self.__ships = new_ships
 
+    def setTerminateGame(self, new_terminate_game):
+        self.__terminate_game = new_terminate_game
+
     def getName(self):
         return self.__name
 
@@ -45,6 +49,9 @@ class Player:
 
     def getShips(self):
         return self.__ships
+
+    def getTerminateGame(self):
+        return self.__terminate_game
 
     def defineBoards(self):
         self.__positional_board.createPositionalBoard()
@@ -80,42 +87,62 @@ class Player:
                     print("Este casillero está ocupado. Por favor, definí una nueva posición.")
 
             self.getMainBoard().displayBoard()
-        print(placed_ships)
         self.getMainBoard().setPlacedShips(placed_ships)
         print(f"\n\n=======================================================\n\n")
 
+    def isPlacedShipsEmpty(self):
+        c = 0
+        for i in self.getMainBoard().getPlacedShips():
+            if len(i) == 0:
+                c = c + 1
+                if c == DEFAULT_NUMBER_OF_SHIPS:
+                    return True
+            else:
+                pass
+        return False
+
     def attack(self, enemy):
-        while True:
-            print(f"\n\n=======================================================\n"
-                  f"\nTurno de disparar del jugador N°{self.getNumber()}: {self.getName()}")
-            self.__positional_board.displayBoard()
-            print("\nIngresá la coordenada donde querés atacar.")
+        is_enemy_placed_ships_list_empty = enemy.isPlacedShipsEmpty()
+        while not is_enemy_placed_ships_list_empty:
+            if enemy.isPlacedShipsEmpty():
+                break
             while True:
-                row = editRowInfo()
-                column = editColumnInfo()
-                coordinate = (column, row)
+                print(f"\n\n=======================================================\n"
+                      f"\nTurno de disparar del jugador N°{self.getNumber()}: {self.getName()}")
+                self.__positional_board.displayBoard()
+                print("\nIngresá la coordenada donde querés atacar.")
+                while True:
+                    row = editRowInfo()
+                    column = editColumnInfo()
+                    coordinate = (column, row)
 
-                if canFireBomb(row, column):
-                    break
-                elif not canFireBomb(row, column):
-                    print("\nDefiní de nuevo tus coordenadas.")
+                    if canFireBomb(row, column):
+                        break
+                    elif not canFireBomb(row, column):
+                        print("\nDefiní de nuevo tus coordenadas.")
 
-            print("barcos del enemigo en su tabla\n", enemy.getMainBoard().getPlacedShips())
+                if enemy.getMainBoard().isThereAShipPart(coordinate):
 
-            if enemy.getMainBoard().isThereAShip(coordinate):
-                print("¡Tocado! Tenés otro turno.")
-                self.getPositionalBoard().getBoard()[column][row] = enemy.getMainBoard().getBoard()[column][row]
-                enemy.getMainBoard().deleteSankPart(column, row)
-                self.getPositionalBoard().displayBoard()
+                    if enemy.getMainBoard().isInDeletedShipsParts(coordinate):
+                        self.getPositionalBoard().displayBoard()
+                        print("Esta parte ya la habías hundido. Perdés el turno.")
+                        return False
 
-            elif not enemy.getMainBoard().isThereAShip(coordinate):
-                print(coordinate)
-                for i in enemy.getMainBoard().getDeletedShipsParts():
-                    print(i)
-                    if i == coordinate:
-                        pass
-                    else:
+                    elif not enemy.getMainBoard().isInDeletedShipsParts(coordinate):
+                        print("¡Tocado! Tenés otro turno.")
+                        self.getPositionalBoard().getBoard()[column][row] = DEFAULT_SANK_PART_ID_POSITION_BOARD
+                        enemy.getMainBoard().deleteSankPart(column, row)
+                        self.getPositionalBoard().displayBoard()
+
+                        if enemy.isPlacedShipsEmpty():
+                            break
+
+                elif not enemy.getMainBoard().isThereAShipPart(coordinate):
+
+                    if not enemy.getMainBoard().isInDeletedShipsParts(coordinate):
                         self.getPositionalBoard().getBoard()[column][row] = DEFAULT_WATER_ID_POSITION_BOARD
                         print("¡Agua!")
-                self.getPositionalBoard().displayBoard()
-                return False
+                        self.getPositionalBoard().displayBoard()
+                        return False
+
+        enemy.setTerminateGame(True)

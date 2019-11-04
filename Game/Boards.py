@@ -110,22 +110,30 @@ class Board:
     def insertValue(self, column, row, value):
         self.__board[column][row] = value
 
-    def isThereAShip(self, coordinate):
+    def isThereAShipPart(self, coordinate):
+        column = coordinate[0]
+        row = coordinate[1]
         for i in range(len(self.__placed_ships)):
             for j in self.__placed_ships[i]:
-                if j == coordinate:
+                if j == coordinate and self.__board[column][row] != 0:
                     return True
                 else:
-                    return False
+                    pass
+        return False
 
     def deleteSankPart(self, column, row):
-        print("barcos ahi before ", self.__placed_ships)
         for i in range(len(self.__placed_ships)):
             for j in self.__placed_ships[i]:
                 if j == (column, row):
-                    print("elemento: ", j)
                     self.__placed_ships[i].remove(j)
                     self.__deleted_ships_parts.append(j)
                 else:
                     pass
-        print("barcos ahi after", self.__placed_ships)
+
+    def isInDeletedShipsParts(self, coordinate):
+        for i in self.__deleted_ships_parts:
+            if i == coordinate:
+                return True
+            elif i != coordinate:
+                pass
+        return False

@@ -10,9 +10,8 @@ while cycle_menu:
     print("===============================================\n\n¡Bienvenido a Naval Battle Game!")
     print("Seleccioná una opción para continuar:")
     print(f"1.\tCrear partida",
-          f"\n2.\tCargar partida guardada",
-          f"\n3.\tAyuda",
-          f"\n4.\tSalir\n\n===============================================")
+          f"\n2.\tAyuda",
+          f"\n3.\tSalir\n\n===============================================")
 
     op = editMenuOption()
     if op == 1:
@@ -76,12 +75,9 @@ while cycle_menu:
 
         naval_battle.startWar()
 
-        naval_battle.endGame()
+        break
 
     elif op == 2:
-        '''Vamos a ver si se llega a cargar el juego'''
-
-    elif op == 3:
         print("\n\n===============================================\n\nEstás en AYUDA")
         print("Sólo puede haber dos jugadores: un jugador A y un jugador B.")
         print("Ambos dispondrán de dos tableros de 10 columnas por 10 filas:")
@@ -96,7 +92,7 @@ while cycle_menu:
         print(f"\nPresioná ENTER para volver atras.")
         input()
 
-    elif op == 4:
+    elif op == 3:
         cycle_menu = False
 
     else:
